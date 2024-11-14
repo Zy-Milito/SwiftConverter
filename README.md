@@ -1,27 +1,42 @@
-# SwiftConverter
+# Swift | A New Way to Simplify Conversions
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
+Swift is an app designed to facilitate currency conversions based on users' subscription plans, ensuring seamless and rapid conversions. This website will serve as the final project for this semester.
 
-## Development server
+Both the frontend and the backend are being developed simultaneously, with the frontend using Angular CLI 18, and the backend .NET.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## To-Do List
 
-## Code scaffolding
+### Homepage tab
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Conversion Form,
+- Faved Currencies List,
+- User Info.
 
-## Build
+### Currencies tab
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Lists all the currencies available on the app.
 
-## Running unit tests
+### Conversions tab
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Lists the conversion history of the logged user.
 
-## Running end-to-end tests
+### Admin tab (Admin only)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Admins can add, edit, modify, or delete currencies,
+- App metrics.
 
-## Further help
+### Responsive Design
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Completed
+
+### Branding
+
+### Login Page
+
+### Registration Page
+
+### Dashboard (Base component)
+
+### 404 Page
+
+### User authentication/Token management

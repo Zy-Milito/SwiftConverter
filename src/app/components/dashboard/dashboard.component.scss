@@ -1,0 +1,97 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  font-family: "Source Code Pro", Verdana, sans-serif;
+
+  section {
+    background-color: #1b2028;
+    width: 15%;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    img {
+      margin-top: 2vw;
+      width: 10vw;
+      margin-bottom: 2vw;
+      align-self: center;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      justify-content: space-between;
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin: 0 1vw 2vw;
+        align-items: center;
+
+        a {
+          width: 8vw;
+          background-color: inherit;
+          color: #868788;
+          text-decoration: none;
+          margin: 0.5vw 0;
+          text-align: left;
+          font-size: 0.9vw;
+          font-weight: 500;
+          padding: 0.6vw 2vw;
+          border-radius: 0.4vw;
+          cursor: pointer;
+        }
+
+        a:hover {
+          background-color: #f49d00;
+          color: #ffffff;
+        }
+
+        a:active {
+          background-color: #f0be63;
+        }
+
+        .active-tab {
+          background-color: #f49d00;
+          color: #ffffff;
+        }
+      }
+
+      .nav-buttons {
+        display: flex;
+        flex-direction: column;
+        margin: 0 1vw 2vw;
+        align-items: center;
+
+        button {
+          color: #868788;
+          width: 12vw;
+          background-color: inherit;
+          font-size: 0.8vw;
+          text-align: left;
+          margin: 0.5vw 0;
+          text-align: left;
+          font-size: 0.9vw;
+          font-weight: 500;
+          padding: 0.6vw 2vw;
+          margin: 0.5vw 0;
+          border-radius: 0.4vw;
+          border: none;
+        }
+
+        button:hover {
+          background-color: #31456b;
+          color: #ffffff;
+        }
+
+        button:active {
+          background-color: #132342;
+        }
+      }
+    }
+  }
+}

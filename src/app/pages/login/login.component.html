@@ -1,0 +1,22 @@
+<main class="login-component">
+  <section class="sign-in">
+    <img src="/assets/images/swift_imagotype.png">
+    <p>A New Way to Simplify Conversions.</p>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <fieldset>
+        <input type="text" name="username" placeholder="Username" class="input" required ngModel>
+        <input type="password" name="password" placeholder="Password" class="input" required ngModel>
+      </fieldset>
+      <button type="submit" (keyup.enter)="login(loginForm)" [disabled]="loginForm.invalid"
+        [ngClass]="{'login-btn-disabled': loginForm.invalid, 'login-btn-enabled': loginForm.valid}">Sign In</button>
+      @if (errorLogin) {
+      <p>Some error</p>
+      }
+    </form>
+  </section>
+  <section class="sign-up">
+    <h1>New here?</h1>
+    <p>Join now to discover a world of effortless conversions!</p>
+    <a [routerLink]="['/register']">Sign Up</a>
+  </section>
+</main>

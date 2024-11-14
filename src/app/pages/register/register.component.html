@@ -1,0 +1,24 @@
+<main class="register-component">
+  <section class="sign-up">
+    <img src="/assets/images/swift_imagotype.png">
+    <form #regForm="ngForm" (ngSubmit)="register(regForm)">
+      <fieldset>
+        <input type="text" name="username" placeholder="Username" class="input" required ngModel>
+        <input type="email" name="email" placeholder="Email Address" class="input" required ngModel>
+        <input type="password" name="password" placeholder="Password" class="input" required ngModel>
+        <input type="password" name="password-check" placeholder="Repeat Password" class="input" required ngModel>
+      </fieldset>
+      <button type="submit" (keyup.enter)="register(regForm)" [disabled]="regForm.invalid"
+        [ngClass]="{'register-btn-disabled': regForm.invalid, 'register-btn-enabled': regForm.valid}">Create
+        Account</button>
+      @if (errorReg) {
+      <p>some error</p>
+      }
+    </form>
+  </section>
+  <section class="sign-in">
+    <h1>Already have an account?</h1>
+    <p>Log in with your existing account instead.</p>
+    <a [routerLink]="['/login']">Sign In</a>
+  </section>
+</main>

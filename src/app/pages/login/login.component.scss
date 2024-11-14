@@ -1,0 +1,137 @@
+.login-component {
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+  font-family: "Source Code Pro", Verdana, sans-serif;
+
+  .sign-in {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150%;
+
+    img {
+      width: 25vw;
+    }
+
+    p {
+      margin-top: 1.8vw;
+      color: #ffffff;
+      font-size: 1.6vw;
+      font-weight: 900;
+    }
+
+    form {
+      width: 35vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 3vw;
+      height: 100%;
+      border-radius: 1vw;
+
+      fieldset {
+        border: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input {
+          margin: 1vw;
+          padding: 0.8vw 1vw;
+          width: 25vw;
+          font-size: 1.2vw;
+          border-top: none;
+          border-right: none;
+          border-left: none;
+          border-bottom: solid;
+          border-color: #f49d00;
+        }
+
+        input:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        font-family: "DM Mono", Verdana, sans-serif;
+        color: #333333;
+        padding: 1vw 4vw;
+        font-size: 1.2vw;
+        border-radius: 5vw;
+        margin: 1vw;
+      }
+
+      .login-btn-enabled:hover {
+        color: #ffffff;
+        background-color: #f49d00;
+      }
+
+      .login-btn-enabled:active {
+        color: #ffffff;
+        background-color: #f0be63;
+      }
+
+      .login-btn-disabled {
+        cursor: default;
+      }
+
+      p {
+        color: #ff0000;
+        font-size: 0.8vw;
+        margin-top: -0.5vw;
+      }
+    }
+  }
+
+  .sign-up {
+    background-color: #be5a23;
+    height: inherit;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    border-top-left-radius: 35vw;
+    border-bottom-left-radius: 15vw;
+
+    h1 {
+      font-size: 3vw;
+    }
+
+    p {
+      font-size: 1.3vw;
+      width: 32vw;
+      margin: 1.8vw 0 1.3vw;
+      line-height: 2vw;
+    }
+
+    a {
+      background-color: #f0f0f0;
+      color: #333333;
+      font-family: "DM Mono", Verdana, sans-serif;
+      padding: 1vw 4vw;
+      font-size: 1.2vw;
+      border-radius: 5vw;
+      margin: 1vw;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ffffff;
+      background-color: #31456b;
+    }
+
+    a:active {
+      color: #ffffff;
+      background-color: #132342;
+    }
+  }
+}
