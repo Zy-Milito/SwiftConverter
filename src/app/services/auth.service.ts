@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   async register(regData: IRegister) {
-    const res = await fetch(environment.API_URL + 'authentication/register', {
+    const res = await fetch(environment.API_URL + 'user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

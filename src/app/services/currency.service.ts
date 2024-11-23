@@ -8,7 +8,13 @@ import { environment } from '../../environments/environment.development';
 export class CurrencyService {
   currencies: ICurrency[] = [];
 
-  constructor() {}
+  constructor() {
+    this.loadData();
+  }
+
+  async loadData() {
+    await this.getCurrencies();
+  }
 
   async getCurrencies() {
     const res = await fetch(environment.API_URL + 'currency/currencies', {

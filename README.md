@@ -12,10 +12,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 - Faved Currencies List,
 - User Info.
 
-### Currencies tab
-
-- Lists all the currencies available on the app.
-
 ### Conversions tab
 
 - Lists the conversion history of the logged user.
@@ -40,3 +36,5 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### 404 Page
 
 ### User authentication/Token management
+
+### Currencies tab

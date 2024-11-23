@@ -1,16 +1,29 @@
-<header>
-  <h1>Dashboard</h1>
-  <p>Welcome back, user!</p>
+<header class="currencies-header">
+  <h1>All Our Currencies</h1>
 </header>
-<section>
-  <form>
-    <p>Quick Convert</p>
-    <fieldset>
-      <input type="text" name="amount" required ngModel>
-      <label for="fromCurrency">From</label>
-      <select name="fromCurrency"></select>
-      <label for="toCurrency">To</label>
-      <select name="toCurrency"></select>
-    </fieldset>
-  </form>
+<section class="currencies-container">
+  @for (currency of currencyService.currencies; track $index){
+  <div class="currency-container">
+    <div class="currency-info-container">
+      <div class="symbol-container">
+        <p>{{currency.symbol}}</p>
+      </div>
+      <div>
+        <p>{{currency.name}}</p>
+        <p class="ISOCode">{{currency.isoCode}}</p>
+      </div>
+    </div>
+    <div class="currency-footer-ctn">
+      <p>EXR: {{currency.exchangeRate}}</p>
+      <img src="/assets/vectors/fav.svg">
+    </div>
+  </div>
+  } @empty {
+  <div class="no-currencies-ctn">
+    <div>
+      <img src="/assets/images/no-currencies.png">
+      <p>No currencies found!</p>
+    </div>
+  </div>
+  }
 </section>

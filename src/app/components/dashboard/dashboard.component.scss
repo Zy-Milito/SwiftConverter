@@ -95,4 +95,11 @@
       }
     }
   }
+
+  main {
+    height: 100svh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 100vw;
+  }
 }
