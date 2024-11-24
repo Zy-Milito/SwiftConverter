@@ -11,6 +11,7 @@ Both the frontend and the backend are being developed simultaneously, with the f
 - Conversion Form,
 - Faved Currencies List,
 - User Info.
+- Plans.
 
 ### Conversions tab
 
