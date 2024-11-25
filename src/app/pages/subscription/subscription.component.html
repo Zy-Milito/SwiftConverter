@@ -4,7 +4,7 @@
 </header>
 <section class="plans">
   @for (plan of subscriptionService.subscriptionPlans; track $index){
-  <div class="plan-card" [ngClass]="{'basic-color': plan.name == 'Basic', 'pro-color': plan.name == 'Pro'}">
+  <div class="plan-card" [ngClass]="{'free-color': plan.name == 'Free', 'basic-color': plan.name == 'Basic'}">
     <div class="title-ctn">
       <h2>{{plan.name}}</h2>
     </div>

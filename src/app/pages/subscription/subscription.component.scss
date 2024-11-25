@@ -41,10 +41,8 @@
     box-shadow: 0.4vw 0.6vw 1vw #1c1c1c;
 
     .title-ctn h2 {
-      background-color: #76407a;
-      background-image: linear-gradient(to bottom, #76407a, #9f39a7);
-      font-size: 2.5vw;
-      padding: 0.6vw;
+      background-image: none;
+      font-size: 2.8vw;
       border-radius: 2vw;
       font-family: "Be Vietnam Pro", sans-serif;
       letter-spacing: 0.2vw;
@@ -112,15 +110,35 @@
     box-shadow: 0.4vw 1.1vw 1vw #1c1c1c;
   }
 
-  .basic-color {
-    background-color: #f49d00;
+  .free-color {
+    background-color: #52598b;
 
     .title-ctn:after {
-      background-color: #586aea;
+      background-color: #1c1c1c;
     }
 
     .description-ctn {
-      background-color: #d8af64;
+      background-color: #8d92bb;
+
+      p {
+        color: #0e0e0e;
+      }
+    }
+
+    .price:before {
+      background-color: #1c1c1c;
+    }
+  }
+
+  .basic-color {
+    background-color: #d6a448;
+
+    .title-ctn:after {
+      background-color: #1c1c1c;
+    }
+
+    .description-ctn {
+      background-color: #d4b478;
 
       p {
         color: #1c1c1c;
@@ -128,19 +146,7 @@
     }
 
     .price:before {
-      background-color: #586aea;
-    }
-  }
-
-  .pro-color {
-    background-color: #586aea;
-
-    .description-ctn {
-      background-color: #8f98db;
-
-      p {
-        color: #0e0e0e;
-      }
+      background-color: #1c1c1c;
     }
   }
 }
