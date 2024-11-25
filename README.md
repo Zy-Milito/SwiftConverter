@@ -22,6 +22,11 @@ Both the frontend and the backend are being developed simultaneously, with the f
 - Admins can add, edit, modify, or delete currencies,
 - App metrics.
 
+### Subscription tab
+
+- User should be able to switch plans.
+- Header should show current plan.
+
 ### Responsive Design
 
 ## Completed

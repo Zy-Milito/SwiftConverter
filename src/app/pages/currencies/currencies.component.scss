@@ -9,13 +9,13 @@
   }
 }
 
-.currencies-container {
+.currencies {
   margin: 3.5vw 1vw 2vw;
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
 
-  .currency-container {
+  .currency-card {
     color: #ffffff;
     width: 15vw;
     height: 10vw;
@@ -26,12 +26,12 @@
     margin: 1vw 0.5vw;
     transition-duration: 0.2s;
 
-    .currency-info-container {
+    .card-body {
       margin: 0.5vw;
       display: flex;
       flex-direction: row;
 
-      .symbol-container {
+      .symbol-ctn {
         background-color: #f49d00;
         margin: 0.5vw;
         width: 3vw;
@@ -59,7 +59,7 @@
       }
     }
 
-    .currency-footer-ctn {
+    .card-footer {
       margin: 1.5vw 1vw 0;
       display: flex;
       flex-direction: row;
@@ -69,31 +69,37 @@
         font-size: 0.9vw;
       }
 
-      img {
-        margin-top: 1vw;
-        width: 1.8vw;
-        cursor: pointer;
-        transition-duration: 0.1s;
-      }
+      aside {
+        display: flex;
+        justify-content: center;
+        width: 2vw;
 
-      img:hover {
-        transition-duration: 0.1s;
-        width: 1.6vw;
-      }
+        img {
+          margin-top: 1vw;
+          width: 1.8vw;
+          cursor: pointer;
+          transition-duration: 0.1s;
+        }
 
-      img:active {
-        transition-duration: 0.1s;
-        width: 1.4vw;
+        img:hover {
+          transition-duration: 0.1s;
+          width: 1.6vw;
+        }
+
+        img:active {
+          transition-duration: 0.1s;
+          width: 1.4vw;
+        }
       }
     }
   }
 
-  .currency-container:hover {
+  .currency-card:hover {
     transform: translateY(-0.5vw);
     transition: 0.5s;
   }
 
-  .currency-container:nth-child(even) {
+  .currency-card:nth-child(even) {
     background-color: #586aea;
   }
 

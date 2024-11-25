@@ -1,0 +1,146 @@
+.subscription-header {
+  margin: 2vw 2vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  justify-content: space-between;
+
+  h1 {
+    font-weight: 500;
+    font-size: 2vw;
+  }
+
+  p {
+    font-size: 2vw;
+  }
+}
+
+.plans {
+  margin: 3.5vw 1vw 2vw;
+  color: #ffffff;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .plan-card {
+    background-color: #1b2028;
+    width: 18vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 34vw;
+    justify-content: space-evenly;
+    border-radius: 0.2vw;
+    padding: 1vw 0.5vw;
+    margin: 1vw 0.5vw;
+    transition-duration: 0.2s;
+    box-shadow: 0.4vw 0.6vw 1vw #1c1c1c;
+
+    .title-ctn h2 {
+      background-color: #76407a;
+      background-image: linear-gradient(to bottom, #76407a, #9f39a7);
+      font-size: 2.5vw;
+      padding: 0.6vw;
+      border-radius: 2vw;
+      font-family: "Be Vietnam Pro", sans-serif;
+      letter-spacing: 0.2vw;
+    }
+
+    .title-ctn:after {
+      content: "";
+      display: block;
+      height: 0.1vw;
+      width: 15vw;
+      margin: 1vw auto 1vw;
+      background-color: #f49d00;
+    }
+
+    .description-ctn {
+      width: 15vw;
+      background-color: #31363d;
+      padding: 3vw 1vw;
+      border-radius: 0.5vw;
+      height: 13vw;
+
+      p {
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 1.2vw;
+        line-height: 1.8vw;
+      }
+
+      margin: 0.2vw 0;
+    }
+
+    button {
+      margin-top: 1.2vw;
+      font-size: 1.3vw;
+      font-family: "DM Mono", Verdana, sans-serif;
+      border-radius: 1vw;
+      padding: 0.6vw 2vw;
+      color: #1c1c1c;
+    }
+
+    button:hover {
+      background-color: #cecece;
+    }
+
+    button:active {
+      background-color: #cececec5;
+    }
+
+    .price:before {
+      content: "";
+      display: block;
+      height: 0.1vw;
+      width: 15vw;
+      margin: 1vw auto 1vw;
+      background-color: #f49d00;
+    }
+
+    .price {
+      font-size: 1vw;
+    }
+  }
+
+  .plan-card:hover {
+    transform: translateY(-0.5vw);
+    transition: 0.5s;
+    box-shadow: 0.4vw 1.1vw 1vw #1c1c1c;
+  }
+
+  .basic-color {
+    background-color: #f49d00;
+
+    .title-ctn:after {
+      background-color: #586aea;
+    }
+
+    .description-ctn {
+      background-color: #d8af64;
+
+      p {
+        color: #1c1c1c;
+      }
+    }
+
+    .price:before {
+      background-color: #586aea;
+    }
+  }
+
+  .pro-color {
+    background-color: #586aea;
+
+    .description-ctn {
+      background-color: #8f98db;
+
+      p {
+        color: #0e0e0e;
+      }
+    }
+  }
+}

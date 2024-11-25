@@ -1,11 +1,11 @@
 <header class="currencies-header">
   <h1>All Our Currencies</h1>
 </header>
-<section class="currencies-container">
+<section class="currencies">
   @for (currency of currencyService.currencies; track $index){
-  <div class="currency-container">
-    <div class="currency-info-container">
-      <div class="symbol-container">
+  <div class="currency-card">
+    <div class="card-body">
+      <div class="symbol-ctn">
         <p>{{currency.symbol}}</p>
       </div>
       <div>
@@ -13,9 +13,11 @@
         <p class="ISOCode">{{currency.isoCode}}</p>
       </div>
     </div>
-    <div class="currency-footer-ctn">
+    <div class="card-footer">
       <p>EXR: {{currency.exchangeRate}}</p>
-      <img src="/assets/vectors/fav.svg">
+      <aside>
+        <img src="/assets/vectors/fav.svg">
+      </aside>
     </div>
   </div>
   } @empty {

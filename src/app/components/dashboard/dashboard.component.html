@@ -6,6 +6,10 @@
         <a [routerLink]="['home']" routerLinkActive="active-tab">Home</a>
         <a [routerLink]="['currencies']" routerLinkActive="active-tab">Currencies</a>
         <a [routerLink]="['conversions']" routerLinkActive="active-tab">Conversions</a>
+        <a [routerLink]="['subscription']" routerLinkActive="active-tab">Subscription</a>
+        @if (admin) {
+        <a [routerLink]="['admin']" routerLinkActive="active-admin-tab" class="admin-link">Admin</a>
+        }
       </div>
       <div class="nav-buttons">
         <button (click)="logout()">Logout</button>

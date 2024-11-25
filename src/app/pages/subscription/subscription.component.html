@@ -1,0 +1,18 @@
+<header class="subscription-header">
+  <h1>Your Swift Subscription</h1>
+  <p>Current plan: SubscriptionPlan.Name</p>
+</header>
+<section class="plans">
+  @for (plan of subscriptionService.subscriptionPlans; track $index){
+  <div class="plan-card" [ngClass]="{'basic-color': plan.name == 'Basic', 'pro-color': plan.name == 'Pro'}">
+    <div class="title-ctn">
+      <h2>{{plan.name}}</h2>
+    </div>
+    <div class="description-ctn">
+      <p>{{plan.description}}</p>
+    </div>
+    <button>Get Now!</button>
+    <p class="price">${{plan.price}} / month</p>
+  </div>
+  }
+</section>

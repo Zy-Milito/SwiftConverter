@@ -59,6 +59,19 @@
           background-color: #f49d00;
           color: #ffffff;
         }
+
+        .admin-link:hover {
+          background-color: rgb(65, 74, 90);
+        }
+
+        .admin-link:active {
+          background-color: #363b44;
+        }
+
+        .active-admin-tab {
+          background-color: rgb(65, 74, 90);
+          color: #ffffff;
+        }
       }
 
       .nav-buttons {

@@ -24,6 +24,7 @@ export class AuthService {
           token: token,
           isAdmin: decodedToken.isAdmin ? true : false,
         };
+      else this.user!.token = token;
     }
   }
 
@@ -67,7 +68,7 @@ export class AuthService {
 
     const userDetailsResJson = await userDetailsRes.json();
 
-    this.user.isAdmin = userDetailsResJson.admin;
+    this.user.isAdmin = userDetailsResJson.isAdmin;
 
     return userDetailsRes;
   }
