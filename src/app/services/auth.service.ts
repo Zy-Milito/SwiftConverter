@@ -22,7 +22,7 @@ export class AuthService {
         this.user = {
           username: decodedToken.username,
           token: token,
-          isAdmin: decodedToken.isAdmin ? true : false,
+          isAdmin: decodedToken.isAdmin == 'True' ? true : false,
         };
       else this.user!.token = token;
     }
