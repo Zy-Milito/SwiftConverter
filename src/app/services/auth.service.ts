@@ -1,34 +1,26 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IUser } from '../interfaces/user';
 import { ILogin, IResLogin } from '../interfaces/login';
 import { environment } from '../../environments/environment.development';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { IRegister } from '../interfaces/register';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  userService = inject(UserService);
+
   constructor() {
-    const helper = new JwtHelperService();
-    const token = this.getToken();
-
-    if (!token) return;
-
-    const decodedToken = helper.decodeToken(token);
-
-    if (token) {
-      if (!this.user)
-        this.user = {
-          username: decodedToken.username,
-          token: token,
-          isAdmin: decodedToken.isAdmin == 'True' ? true : false,
-        };
-      else this.user!.token = token;
+    this.token = localStorage.getItem('authToken');
+    const userDetails = sessionStorage.getItem('userDetails');
+    if (userDetails) {
+      this.user = JSON.parse(userDetails) as IUser;
     }
   }
 
   user: IUser | undefined;
+  token: string | null;
 
   async login(loginData: ILogin) {
     const res = await fetch(environment.API_URL + 'authentication/login', {
@@ -45,20 +37,15 @@ export class AuthService {
 
     if (!resJson.token) return;
 
-    this.user = {
-      username: loginData.username,
-      token: resJson.token,
-      isAdmin: false,
-    };
-
     localStorage.setItem('authToken', resJson.token);
+    this.token = resJson.token;
 
     const userDetailsRes = await fetch(
-      environment.API_URL + `user/${encodeURIComponent(loginData.username)}`,
+      environment.API_URL + 'user/validation',
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${resJson.token}`,
+          Authorization: `${resJson.token}`,
           'Content-Type': 'application/json',
         },
       }
@@ -68,7 +55,8 @@ export class AuthService {
 
     const userDetailsResJson = await userDetailsRes.json();
 
-    this.user.isAdmin = userDetailsResJson.isAdmin;
+    this.user = userDetailsResJson;
+    sessionStorage.setItem('userDetails', JSON.stringify(userDetailsResJson));
 
     return userDetailsRes;
   }
@@ -92,10 +80,8 @@ export class AuthService {
 
   clearToken() {
     localStorage.removeItem('authToken');
-    this.user = {
-      username: '',
-      token: '',
-      isAdmin: false,
-    };
+    sessionStorage.removeItem('userDetails');
+    this.token = '';
+    this.user = undefined;
   }
 }
