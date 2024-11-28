@@ -3,14 +3,11 @@ import { IUser } from '../interfaces/user';
 import { ILogin, IResLogin } from '../interfaces/login';
 import { environment } from '../../environments/environment.development';
 import { IRegister } from '../interfaces/register';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userService = inject(UserService);
-
   constructor() {
     this.token = localStorage.getItem('authToken');
     const userDetails = sessionStorage.getItem('userDetails');
