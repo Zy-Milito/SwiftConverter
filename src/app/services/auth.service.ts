@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/user';
 import { ILogin, IResLogin } from '../interfaces/login';
 import { environment } from '../../environments/environment.development';
