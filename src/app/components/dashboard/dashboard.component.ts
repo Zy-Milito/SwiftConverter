@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth.service';
 export class DashboardComponent {
   authService = inject(AuthService);
   router = inject(Router);
-  admin = this.authService.user?.isAdmin;
 
   logout() {
     this.authService.clearToken();

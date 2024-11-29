@@ -23,7 +23,7 @@ export class LoginComponent {
 
     const res = await this.authService.login(loginData);
 
-    if (res?.statusText === 'OK') this.router.navigate(['/dashboard']);
+    if (res?.username) this.router.navigate(['/dashboard']);
     else this.errorLogin = true;
   }
 }

@@ -7,7 +7,7 @@
         <a [routerLink]="['currencies']" routerLinkActive="active-tab">Currencies</a>
         <a [routerLink]="['conversions']" routerLinkActive="active-tab">Conversions</a>
         <a [routerLink]="['subscription']" routerLinkActive="active-tab">Subscription</a>
-        @if (admin) {
+        @if (this.authService.user?.isAdmin) {
         <a [routerLink]="['admin']" routerLinkActive="active-admin-tab" class="admin-link">Admin</a>
         }
       </div>

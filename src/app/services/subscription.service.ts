@@ -7,6 +7,7 @@ import { ISubscriptionPlan } from '../interfaces/subscriptionPlan';
 })
 export class SubscriptionService {
   subscriptionPlans: ISubscriptionPlan[] = [];
+  currentSubscriptionPlan: ISubscriptionPlan | undefined;
 
   constructor() {
     this.getPlans();
