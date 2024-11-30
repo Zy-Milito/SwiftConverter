@@ -2,18 +2,148 @@
   <h1>Dashboard</h1>
   <p>Welcome back, {{authService.user?.username}}!</p>
 </header>
-<section class="conversion">
-  <form>
-    <p>Quick Convert</p>
-    <fieldset>
-      <input type="text" name="amount" required ngModel>
-      <label for="fromCurrency">From</label>
-      <select name="fromCurrency"></select>
-      <label for="toCurrency">To</label>
-      <select name="toCurrency"></select>
-    </fieldset>
-  </form>
-</section>
-<section class="faves">
-
-</section>
+<div>
+  <div>
+    <section class="conversion">
+      <form #conversionForm="ngForm" (ngSubmit)="convert(conversionForm)">
+        <h2>Quick Convert</h2>
+        <fieldset>
+          <div class="form-column">
+            <div>
+              <label for="fromCurrency">FROM</label>
+              <select name="fromCurrency" required ngModel>
+                <option value="">Select a currency</option>
+                @for (currency of this.currencyService.currencies; track $index){
+                <option value="{{currency.exchangeRate}}">{{currency.name}}</option>
+                }
+              </select>
+            </div>
+            <div>
+              <p>AMOUNT<p>
+                  <input type="number" name="amount" placeholder="Type here" required ngModel>
+            </div>
+          </div>
+          <div class="form-column">
+            <div>
+              <label for="toCurrency">TO</label>
+              <select name="toCurrency" required ngModel>
+                <option value="">Select a currency</option>
+                @for (currency of this.currencyService.currencies; track $index) {
+                <option value="{{currency.exchangeRate}}">{{currency.name}}</option>
+                }
+              </select>
+            </div>
+            <div>
+              <p>AMOUNT</p>
+              @if(lastConversion != undefined) {
+              <p class="output">{{lastConversion}}</p>
+              } @else {
+              <p class="output">Result</p>
+              }
+            </div>
+          </div>
+        </fieldset>
+        <div class="btn-ctn">
+          <button type="submit" (keyup.enter)="convert(conversionForm)" [disabled]="conversionForm.invalid"
+            [ngClass]="{'btn-disabled': conversionForm.invalid, 'btn-enabled': conversionForm.valid}"><a>Convert</a></button>
+        </div>
+      </form>
+    </section>
+    <section class="info">
+      <h3>User info:</h3>
+      <p>Current plan: </p>
+      <p>Conversions left: </p>
+      <p>Favorite currencies: </p>
+    </section>
+  </div>
+  <section class="faves">
+    <h2>Favorite Currencies</h2>
+    <div class="currencies">
+      <div class="currency-card">
+        <div class="card-body">
+          <div class="symbol-ctn">
+            <p>$</p>
+          </div>
+          <div>
+            <p>Lorem Ipsum</p>
+            <p class="ISOCode">LPS</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>EXR: 0.00014</p>
+          <aside>
+            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+          </aside>
+        </div>
+      </div>
+      <div class="currency-card">
+        <div class="card-body">
+          <div class="symbol-ctn">
+            <p>$</p>
+          </div>
+          <div>
+            <p>Lorem Ipsum</p>
+            <p class="ISOCode">LPS</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>EXR: 0.00014</p>
+          <aside>
+            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+          </aside>
+        </div>
+      </div>
+      <div class="currency-card">
+        <div class="card-body">
+          <div class="symbol-ctn">
+            <p>$</p>
+          </div>
+          <div>
+            <p>Lorem Ipsum</p>
+            <p class="ISOCode">LPS</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>EXR: 0.00014</p>
+          <aside>
+            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+          </aside>
+        </div>
+      </div>
+      <div class="currency-card">
+        <div class="card-body">
+          <div class="symbol-ctn">
+            <p>$</p>
+          </div>
+          <div>
+            <p>Lorem Ipsum</p>
+            <p class="ISOCode">LPS</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>EXR: 0.00014</p>
+          <aside>
+            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+          </aside>
+        </div>
+      </div>
+      <div class="currency-card">
+        <div class="card-body">
+          <div class="symbol-ctn">
+            <p>$</p>
+          </div>
+          <div>
+            <p>Lorem Ipsum</p>
+            <p class="ISOCode">LPS</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>EXR: 0.00014</p>
+          <aside>
+            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
