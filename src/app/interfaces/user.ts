@@ -1,6 +1,5 @@
 import { ICurrency } from './currency';
 import { IHistory } from './history';
-import { ISubscriptionPlan } from './subscriptionPlan';
 
 export interface IUser {
   id: number;
