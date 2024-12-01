@@ -14,7 +14,7 @@
               <select name="fromCurrency" required ngModel>
                 <option value="">Select a currency</option>
                 @for (currency of this.currencyService.currencies; track $index){
-                <option value="{{currency.exchangeRate}}">{{currency.name}}</option>
+                <option value="{{currency.id}}">{{currency.name}}</option>
                 }
               </select>
             </div>
@@ -29,7 +29,7 @@
               <select name="toCurrency" required ngModel>
                 <option value="">Select a currency</option>
                 @for (currency of this.currencyService.currencies; track $index) {
-                <option value="{{currency.exchangeRate}}">{{currency.name}}</option>
+                <option value="{{currency.id}}">{{currency.name}}</option>
                 }
               </select>
             </div>
@@ -52,7 +52,7 @@
     <section class="info">
       <div>
         <h3>User Info</h3>
-        <p>Current plan: <b>{{this.subscriptionService.currentSubscriptionPlan?.name}}</b></p>
+        <p>Current plan: <b>{{subscriptionService.currentSubscriptionPlan?.name}}</b></p>
         <p>Conversions left: <b>{{authService.user?.conversionsLeft}}</b></p>
         <p>Favorite currencies: </p>
       </div>

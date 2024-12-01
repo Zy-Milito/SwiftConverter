@@ -26,14 +26,14 @@ div {
     flex-direction: column;
 
     .conversion {
-      background-color: aqua;
-      width: 60vw;
+      // background-color: aqua;
+      width: 50vw;
       height: 30vw;
       color: #ffffff;
       font-family: "Montserrat", sans-serif;
 
       form {
-        width: 40vw;
+        width: 45vw;
         height: 30vw;
         margin: 0 2vw;
         background-color: #1b2028;
@@ -162,18 +162,25 @@ div {
     }
 
     .info {
-      background-color: bisque;
-      width: 60vw;
+      // background-color: bisque;
+      width: 50vw;
       height: 13vw;
+      color: #ffffff;
 
       div {
-        margin: 2vw 4vw;
+        width: 41.001vw;
+        background-color: #1b2028;
+        margin: 2vw 2vw 0;
+        padding: 1.5vw 2vw;
+        border-radius: 2vw;
 
         h3 {
+          width: 20vw;
           font-size: 1.3vw;
         }
 
         p {
+          width: 20vw;
           margin-top: 1vw;
         }
       }
@@ -184,8 +191,8 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aquamarine;
-    width: 26vw;
+    // background-color: aquamarine;
+    width: 36vw;
     height: 43vw;
     overflow: scroll;
     scrollbar-width: none;
