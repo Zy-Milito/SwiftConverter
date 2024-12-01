@@ -8,10 +8,8 @@ Both the frontend and the backend are being developed simultaneously, with the f
 
 ### Homepage tab
 
-- Conversion Form,
-- Faved Currencies List,
-- User Info.
-- Plans.
+- Conversion Form (link to backend);
+- Faved Currencies List (make functional),
 
 ### Conversions tab
 

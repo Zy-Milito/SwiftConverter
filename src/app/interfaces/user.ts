@@ -9,5 +9,6 @@ export interface IUser {
   subscriptionPlanId: number;
   favedCurrencies: ICurrency[] | undefined;
   conversionHistory: IHistory[] | undefined;
+  conversionsLeft: string;
   accountStatus: boolean;
 }

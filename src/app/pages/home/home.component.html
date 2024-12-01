@@ -50,10 +50,12 @@
       </form>
     </section>
     <section class="info">
-      <h3>User info:</h3>
-      <p>Current plan: </p>
-      <p>Conversions left: </p>
-      <p>Favorite currencies: </p>
+      <div>
+        <h3>User Info</h3>
+        <p>Current plan: <b>{{this.subscriptionService.currentSubscriptionPlan?.name}}</b></p>
+        <p>Conversions left: <b>{{authService.user?.conversionsLeft}}</b></p>
+        <p>Favorite currencies: </p>
+      </div>
     </section>
   </div>
   <section class="faves">

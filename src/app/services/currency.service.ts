@@ -26,6 +26,7 @@ export class CurrencyService {
     if (res.status !== 200) return;
     const resJson: ICurrency[] = await res.json();
     this.currencies = resJson;
+    return resJson;
   }
 
   async convert(conversionData: IConversion) {

@@ -4,6 +4,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { IConversion } from '../../interfaces/conversion';
 import { CommonModule } from '@angular/common';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
   authService = inject(AuthService);
   currencyService = inject(CurrencyService);
+  subscriptionService = inject(SubscriptionService);
   lastConversion: number | undefined;
 
   async convert(conversionForm: NgForm) {
