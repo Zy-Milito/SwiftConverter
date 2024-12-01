@@ -11,7 +11,11 @@
     <div class="description-ctn">
       <p>{{plan.description}}</p>
     </div>
+    @if (subscriptionService.currentSubscriptionPlan?.name == plan.name){
+    <button [disabled]="subscriptionService.currentSubscriptionPlan?.name == plan.name">Current</button>
+    } @else {
     <button>Get Now!</button>
+    }
     <p class="price">${{plan.price}} / month</p>
   </div>
   }

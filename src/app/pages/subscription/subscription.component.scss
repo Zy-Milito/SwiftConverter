@@ -90,6 +90,19 @@
       background-color: #cececec5;
     }
 
+    button:disabled {
+      background-color: #cececea8;
+      cursor: default;
+    }
+
+    button:disabled:hover {
+      background-color: #cececea8;
+    }
+
+    button:disabled:active {
+      background-color: #cececea8;
+    }
+
     .price:before {
       content: "";
       display: block;

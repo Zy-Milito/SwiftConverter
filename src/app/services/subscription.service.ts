@@ -41,6 +41,7 @@ export class SubscriptionService {
     if (res.status !== 200) return;
     const resJson: ISubscriptionPlan = await res.json();
     this.currentSubscriptionPlan = resJson;
+    console.log(this.currentSubscriptionPlan);
     return resJson;
   }
 
