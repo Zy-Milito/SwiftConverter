@@ -14,7 +14,16 @@ export class CurrenciesComponent {
   currencyService = inject(CurrencyService);
   userService = inject(UserService);
 
+  isFavorite(isoCode: string): boolean {
+    const favorites = this.userService.favoriteCurrenciesSubject.value;
+    return favorites.some((currency) => currency.isoCode === isoCode);
+  }
+
   async addFavorite(isoCode: string) {
+    return await this.userService.toggleFavorite(isoCode);
+  }
+
+  async removeFavorite(isoCode: string) {
     return await this.userService.toggleFavorite(isoCode);
   }
 }

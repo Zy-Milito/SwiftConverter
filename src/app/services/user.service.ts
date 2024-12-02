@@ -18,7 +18,7 @@ export class UserService {
   );
   public users$ = this.usersSubject.asObservable();
 
-  private favoriteCurrenciesSubject: BehaviorSubject<ICurrency[]> =
+  public favoriteCurrenciesSubject: BehaviorSubject<ICurrency[]> =
     new BehaviorSubject<ICurrency[]>([]);
   public favoriteCurrencies$ = this.favoriteCurrenciesSubject.asObservable();
 

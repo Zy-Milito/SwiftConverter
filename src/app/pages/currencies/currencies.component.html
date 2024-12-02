@@ -16,7 +16,11 @@
     <div class="card-footer">
       <p>EXR: {{currency.exchangeRate}}</p>
       <aside>
+        @if (isFavorite(currency.isoCode)) {
+        <img (click)="removeFavorite(currency.isoCode)" src="/assets/vectors/broken_heart.svg" alt="Add to favorites.">
+        } @else {
         <img (click)="addFavorite(currency.isoCode)" src="/assets/vectors/heart.svg" alt="Add to favorites.">
+        }
       </aside>
     </div>
   </div>
