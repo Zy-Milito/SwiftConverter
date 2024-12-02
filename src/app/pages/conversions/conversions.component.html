@@ -1,0 +1,33 @@
+<header class="conversions-header">
+  <h1>Conversion History</h1>
+</header>
+<div>
+  <section class="history">
+    <div>
+      <table>
+        <thead>
+          <td>DATE</td>
+          <td>AMOUNT</td>
+          <td>FROM</td>
+          <td>TO</td>
+        </thead>
+        <tbody>
+          @for(history of userService.history; track $index) {
+          <tr>
+            <td>{{history.date}}</td>
+            <td>{{history.amount}}</td>
+            <td>{{history.fromCurrency}}</td>
+            <td>{{history.toCurrency}}</td>
+          </tr>
+          } @empty {
+          <img src="/assets/images/folder.png">
+          <p>You havent't done any conversions yet!</p>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="ad">
+    <img src="/assets/images/ad.jpg" alt="Advertisement.">
+  </section>
+</div>

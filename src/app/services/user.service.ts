@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { IUser } from '../interfaces/user';
 import { ICurrency } from '../interfaces/currency';
 import { AuthService } from './auth.service';
+import { IHistory } from '../interfaces/history';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class UserService {
   authService = inject(AuthService);
   users: IUser[] = [];
   favoriteCurrencies: ICurrency[] = [];
+  history: IHistory[] = [];
 
   constructor() {
     this.loadData();
@@ -19,6 +21,7 @@ export class UserService {
   async loadData() {
     this.getUsers();
     this.getFavorites();
+    this.getUserHistory();
   }
 
   async getUsers() {
@@ -80,7 +83,6 @@ export class UserService {
     if (res.status !== 200) return;
     const resJson: ICurrency[] = await res.json();
     this.favoriteCurrencies = resJson;
-    console.log(this.favoriteCurrencies);
     return resJson;
   }
 
@@ -102,5 +104,19 @@ export class UserService {
       console.log('Currency added to favorites.');
       this.loadData();
     }
+  }
+
+  async getUserHistory() {
+    var userId = this.authService.user?.id;
+    const res = await fetch(environment.API_URL + `user/${userId}/history`, {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + localStorage.getItem('authToken'),
+      },
+    });
+    if (res.status !== 200) return;
+    const resJson: IHistory[] = await res.json();
+    this.history = resJson;
+    return resJson;
   }
 }

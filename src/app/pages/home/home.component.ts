@@ -22,8 +22,12 @@ export class HomeComponent {
   lastConversion: number | undefined;
 
   async convert(conversionForm: NgForm) {
-    const { fromCurrency, amount, toCurrency } = conversionForm.value;
-    const conversionData: IConversion = { fromCurrency, amount, toCurrency };
+    const { fromCurrencyId, amount, toCurrencyId } = conversionForm.value;
+    const conversionData: IConversion = {
+      fromCurrencyId,
+      amount,
+      toCurrencyId,
+    };
 
     const res = await this.currencyService.convert(conversionData);
     this.lastConversion = res;

@@ -16,6 +16,7 @@
 div {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   color: #ffffff;
 
   .user-dashboard {
@@ -38,7 +39,6 @@ div {
       height: 36vw;
 
       table {
-        margin: auto;
         font-size: 1vw;
         width: 100%;
 
@@ -99,7 +99,6 @@ div {
       height: 36vw;
 
       table {
-        margin: auto;
         font-size: 1vw;
         width: 100%;
 

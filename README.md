@@ -6,10 +6,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 
 ## To-Do List
 
-### Conversions tab
-
-- Lists the conversion history of the logged user.
-
 ### Subscription tab
 
 - User should be able to switch plans.
@@ -35,3 +31,5 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### Admin Tab
 
 ### Homepage tab
+
+### Conversions tab

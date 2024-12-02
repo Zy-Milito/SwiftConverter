@@ -3,13 +3,11 @@ import { ICurrency } from '../interfaces/currency';
 import { environment } from '../../environments/environment.development';
 import { IConversion } from '../interfaces/conversion';
 import { UserService } from './user.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrencyService {
-  authService = inject(AuthService);
   userService = inject(UserService);
   currencies: ICurrency[] = [];
 
@@ -35,13 +33,11 @@ export class CurrencyService {
 
   async convert(conversionData: IConversion) {
     try {
-      var conversion = {};
-
       var fromRate = this.currencies.find(
-        (c) => c.id == conversionData.fromCurrency
+        (c) => c.id == conversionData.fromCurrencyId
       )?.exchangeRate;
       var toRate = this.currencies.find(
-        (c) => c.id == conversionData.toCurrency
+        (c) => c.id == conversionData.toCurrencyId
       )?.exchangeRate;
 
       if (!fromRate || !toRate) {
@@ -56,12 +52,7 @@ export class CurrencyService {
       var result = (toUSD / toRate) * usd;
       result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-      conversion = {
-        fromCurrencyId: conversionData.fromCurrency,
-        toCurrencyId: conversionData.toCurrency,
-      };
-
-      await this.userService.newConversion(conversion);
+      await this.userService.newConversion(conversionData);
 
       return result;
     } catch (error) {

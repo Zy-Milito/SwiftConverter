@@ -1,5 +1,5 @@
 export interface IConversion {
-  fromCurrency: number;
+  fromCurrencyId: number;
   amount: number;
-  toCurrency: number;
+  toCurrencyId: number;
 }
