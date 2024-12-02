@@ -61,91 +61,32 @@
   <section class="faves">
     <h2>Favorite Currencies</h2>
     <div class="currencies">
+      @for (fave of userService.favoriteCurrencies; track $index) {
       <div class="currency-card">
         <div class="card-body">
           <div class="symbol-ctn">
-            <p>$</p>
+            <p>{{fave.symbol}}</p>
           </div>
           <div>
-            <p>Lorem Ipsum</p>
-            <p class="ISOCode">LPS</p>
+            <p>{{fave.name}}</p>
+            <p class="ISOCode">{{fave.isoCode}}</p>
           </div>
         </div>
         <div class="card-footer">
-          <p>EXR: 0.00014</p>
+          <p>EXR: {{fave.exchangeRate}}</p>
           <aside>
-            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
+            <img (click)="removeFavorite(fave.isoCode)" src="/assets/vectors/broken_heart.svg"
+              alt="Remove from favorites.">
           </aside>
         </div>
       </div>
-      <div class="currency-card">
-        <div class="card-body">
-          <div class="symbol-ctn">
-            <p>$</p>
-          </div>
-          <div>
-            <p>Lorem Ipsum</p>
-            <p class="ISOCode">LPS</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <p>EXR: 0.00014</p>
-          <aside>
-            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
-          </aside>
-        </div>
+      } @empty {
+      <div class="no-currencies">
+        <p>You have no favorites!</p>
+        <img src="/assets/images/no-currencies.png">
+        <p>Once you pick some favorite currencies from the Currencies tab we will show them here.</p>
       </div>
-      <div class="currency-card">
-        <div class="card-body">
-          <div class="symbol-ctn">
-            <p>$</p>
-          </div>
-          <div>
-            <p>Lorem Ipsum</p>
-            <p class="ISOCode">LPS</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <p>EXR: 0.00014</p>
-          <aside>
-            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
-          </aside>
-        </div>
-      </div>
-      <div class="currency-card">
-        <div class="card-body">
-          <div class="symbol-ctn">
-            <p>$</p>
-          </div>
-          <div>
-            <p>Lorem Ipsum</p>
-            <p class="ISOCode">LPS</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <p>EXR: 0.00014</p>
-          <aside>
-            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
-          </aside>
-        </div>
-      </div>
-      <div class="currency-card">
-        <div class="card-body">
-          <div class="symbol-ctn">
-            <p>$</p>
-          </div>
-          <div>
-            <p>Lorem Ipsum</p>
-            <p class="ISOCode">LPS</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <p>EXR: 0.00014</p>
-          <aside>
-            <img src="/assets/vectors/broken_heart.svg" alt="Remove from favorites.">
-          </aside>
-        </div>
-      </div>
+      }
     </div>
   </section>
 </div>

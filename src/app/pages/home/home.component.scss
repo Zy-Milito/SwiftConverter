@@ -208,7 +208,7 @@ div {
       height: 0.1vw;
       width: 19vw;
       margin: 0.8vw auto 0;
-      background-color: #f49d00;
+      background-color: #1b2028;
     }
 
     .currencies {
@@ -301,6 +301,39 @@ div {
 
       .currency-card:nth-child(even) {
         background-color: #586aea;
+      }
+
+      .no-currencies {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        width: 25vw;
+        margin-top: 7vw;
+
+        img {
+          width: 15vw;
+          margin: 1vw 0;
+        }
+
+        p:first-child {
+          font-size: 1.4vw;
+        }
+
+        p:last-child {
+          font-size: 1vw;
+          color: #ffffffc4;
+        }
+
+        p:last-child:before {
+          content: "";
+          display: block;
+          height: 0.1vw;
+          width: 18vw;
+          margin: 0 auto 1vw;
+          background-color: #f49d00;
+        }
       }
     }
   }

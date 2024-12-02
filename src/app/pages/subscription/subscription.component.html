@@ -1,6 +1,6 @@
 <header class="subscription-header">
   <h1>Your Swift Subscription</h1>
-  <p>Current plan: SubscriptionPlan.Name</p>
+  <p>Current plan: {{subscriptionService.currentSubscriptionPlan?.name}}</p>
 </header>
 <section class="plans">
   @for (plan of subscriptionService.subscriptionPlans; track $index){

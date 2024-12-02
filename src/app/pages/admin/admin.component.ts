@@ -4,7 +4,6 @@ import { CurrencyService } from '../../services/currency.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.scss';
 
 @Component({
   selector: 'app-admin',

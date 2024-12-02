@@ -5,6 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { IConversion } from '../../interfaces/conversion';
 import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../../services/subscription.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent {
   authService = inject(AuthService);
   currencyService = inject(CurrencyService);
   subscriptionService = inject(SubscriptionService);
+  userService = inject(UserService);
   lastConversion: number | undefined;
 
   async convert(conversionForm: NgForm) {
@@ -26,5 +28,9 @@ export class HomeComponent {
     const res = await this.currencyService.convert(conversionData);
     this.lastConversion = res;
     return res;
+  }
+
+  async removeFavorite(isoCode: string) {
+    return await this.userService.toggleFavorite(isoCode);
   }
 }

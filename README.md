@@ -9,7 +9,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### Homepage tab
 
 - Conversion Form (link to backend);
-- Faved Currencies List (make functional),
 
 ### Conversions tab
 
@@ -18,7 +17,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### Subscription tab
 
 - User should be able to switch plans.
-- Header should show current plan.
 
 ### Responsive Design
 
