@@ -29,6 +29,7 @@ export class SubscriptionService {
     if (res.status !== 200) return;
     const resJson: ISubscriptionPlan[] = await res.json();
     this.subscriptionPlans = resJson;
+    return resJson;
   }
 
   async getCurrentPlan() {

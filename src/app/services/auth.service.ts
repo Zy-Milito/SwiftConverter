@@ -41,6 +41,27 @@ export class AuthService {
     return await this.fetchUserDetails(resJson.token);
   }
 
+  async fetchUserDetails(token: string): Promise<IUser | null> {
+    const userDetailsRes = await fetch(
+      environment.API_URL + 'user/validation',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (userDetailsRes.status !== 200) return null;
+
+    const userDetailsResJson = await userDetailsRes.json();
+
+    this.user = userDetailsResJson;
+    this.claims = this.decodeToken(token);
+    return userDetailsResJson;
+  }
+
   async register(regData: IRegister) {
     const res = await fetch(environment.API_URL + 'user/register', {
       method: 'POST',
@@ -62,27 +83,6 @@ export class AuthService {
     localStorage.removeItem('authToken');
     this.user = undefined;
     this.claims = null;
-  }
-
-  async fetchUserDetails(token: string): Promise<IUser | null> {
-    const userDetailsRes = await fetch(
-      environment.API_URL + 'user/validation',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    if (userDetailsRes.status !== 200) return null;
-
-    const userDetailsResJson = await userDetailsRes.json();
-
-    this.user = userDetailsResJson;
-    this.claims = this.decodeToken(token);
-    return userDetailsResJson;
   }
 
   decodeToken(token: string): IClaims {
