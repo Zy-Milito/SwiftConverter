@@ -35,6 +35,8 @@ export class CurrencyService {
 
   async convert(conversionData: IConversion) {
     try {
+      var conversion = {};
+
       var fromRate = this.currencies.find(
         (c) => c.id == conversionData.fromCurrency
       )?.exchangeRate;
@@ -53,6 +55,13 @@ export class CurrencyService {
       var toUSD = (conversionData.amount * fromRate) / usd;
       var result = (toUSD / toRate) * usd;
       result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+      conversion = {
+        fromCurrencyId: conversionData.fromCurrency,
+        toCurrencyId: conversionData.toCurrency,
+      };
+
+      await this.userService.newConversion(conversion);
 
       return result;
     } catch (error) {

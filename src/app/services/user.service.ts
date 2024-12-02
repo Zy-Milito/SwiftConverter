@@ -49,6 +49,26 @@ export class UserService {
     }
   }
 
+  async newConversion(conversion: object) {
+    var userId = this.authService.user?.id;
+    const res = await fetch(
+      environment.API_URL + `user/${userId}/new-conversion`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: 'Bearer ' + localStorage.getItem('authToken'),
+        },
+        body: JSON.stringify(conversion),
+      }
+    );
+    if (res.status !== 201) {
+      console.error('Failed to save conversion.');
+    } else {
+      console.log('Conversion saved successfully.');
+    }
+  }
+
   async getFavorites() {
     var userId = this.authService.user?.id;
     const res = await fetch(environment.API_URL + `user/${userId}/favorites`, {

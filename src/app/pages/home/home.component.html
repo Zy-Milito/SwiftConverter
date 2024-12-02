@@ -5,6 +5,13 @@
 <div>
   <div>
     <section class="conversion">
+      @if (authService.user?.conversionsLeft == '0') {
+      <div class="limit-reached">
+        <p>No conversions left!</p>
+        <img src="assets/images/rb_43953.png">
+        <p>Subscribe now to get access to hundreds of monthly conversions!</p>
+      </div>
+      } @else {
       <form #conversionForm="ngForm" (ngSubmit)="convert(conversionForm)">
         <h2>Quick Convert</h2>
         <fieldset>
@@ -48,6 +55,7 @@
             [ngClass]="{'btn-disabled': conversionForm.invalid, 'btn-enabled': conversionForm.valid}"><a>Convert</a></button>
         </div>
       </form>
+      }
     </section>
     <section class="info">
       <div>

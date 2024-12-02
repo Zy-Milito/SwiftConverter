@@ -6,10 +6,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 
 ## To-Do List
 
-### Homepage tab
-
-- Conversion Form (link to backend);
-
 ### Conversions tab
 
 - Lists the conversion history of the logged user.
@@ -37,3 +33,5 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### Currencies tab
 
 ### Admin Tab
+
+### Homepage tab
