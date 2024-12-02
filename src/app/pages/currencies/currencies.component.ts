@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CurrencyService } from '../../services/currency.service';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-currencies',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './currencies.component.html',
   styleUrl: './currencies.component.scss',
 })

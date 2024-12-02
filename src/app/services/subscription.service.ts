@@ -2,22 +2,36 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { ISubscriptionPlan } from '../interfaces/subscriptionPlan';
 import { AuthService } from './auth.service';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscriptionService {
-  authService = inject(AuthService);
-  subscriptionPlans: ISubscriptionPlan[] = [];
-  currentSubscriptionPlan: ISubscriptionPlan | undefined;
+  private subscriptionPlansSubject: BehaviorSubject<ISubscriptionPlan[]> =
+    new BehaviorSubject<ISubscriptionPlan[]>([]);
+  public subscriptionPlans$ = this.subscriptionPlansSubject.asObservable();
 
-  constructor() {
+  private currentSubscriptionPlanSubject: BehaviorSubject<
+    ISubscriptionPlan | undefined
+  > = new BehaviorSubject<ISubscriptionPlan | undefined>(undefined);
+  public currentSubscriptionPlan$ =
+    this.currentSubscriptionPlanSubject.asObservable();
+
+  constructor(private authService: AuthService) {
+    this.authService.user$.subscribe((user) => {
+      if (user) {
+        this.getCurrentPlan(user.id);
+      } else {
+        this.currentSubscriptionPlanSubject.next(undefined);
+      }
+    });
     this.loadData();
   }
 
   async loadData() {
     this.getPlans();
-    this.getCurrentPlan();
   }
 
   async getPlans() {
@@ -28,12 +42,11 @@ export class SubscriptionService {
     });
     if (res.status !== 200) return;
     const resJson: ISubscriptionPlan[] = await res.json();
-    this.subscriptionPlans = resJson;
+    this.subscriptionPlansSubject.next(resJson);
     return resJson;
   }
 
-  async getCurrentPlan() {
-    var userId = this.authService.user?.id;
+  async getCurrentPlan(userId: number) {
     const res = await fetch(environment.API_URL + `plan/${userId}`, {
       headers: {
         authorization: 'Bearer ' + localStorage.getItem('authToken'),
@@ -41,7 +54,7 @@ export class SubscriptionService {
     });
     if (res.status !== 200) return;
     const resJson: ISubscriptionPlan = await res.json();
-    this.currentSubscriptionPlan = resJson;
+    this.currentSubscriptionPlanSubject.next(resJson);
     return resJson;
   }
 
@@ -55,9 +68,15 @@ export class SubscriptionService {
       body: JSON.stringify(newPlanId),
     });
     if (res.status === 200) {
-      this.getCurrentPlan();
+      await this.getCurrentPlan(userId);
     } else {
-      console.warn('Error! Unable to upgrade your subscription.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Error! Unable to upgrade your subscription.',
+        background: '#1b2028',
+        color: '#fff',
+      });
     }
   }
 }

@@ -1,9 +1,9 @@
 <header class="subscription-header">
   <h1>Your Swift Subscription</h1>
-  <p>Current plan: {{subscriptionService.currentSubscriptionPlan?.name}}</p>
+  <p>Current plan: {{(subscriptionService.currentSubscriptionPlan$ | async)?.name}}</p>
 </header>
 <section class="plans">
-  @for (plan of subscriptionService.subscriptionPlans; track $index){
+  @for (plan of subscriptionService.subscriptionPlans$ | async; track $index){
   <div class="plan-card" [ngClass]="{'free-color': plan.name == 'Free', 'basic-color': plan.name == 'Basic'}">
     <div class="title-ctn">
       <h2>{{plan.name}}</h2>
@@ -11,8 +11,8 @@
     <div class="description-ctn">
       <p>{{plan.description}}</p>
     </div>
-    @if (subscriptionService.currentSubscriptionPlan?.name == plan.name){
-    <button [disabled]="subscriptionService.currentSubscriptionPlan?.name == plan.name">Current</button>
+    @if ((subscriptionService.currentSubscriptionPlan$ | async)?.name == plan.name){
+    <button [disabled]="(subscriptionService.currentSubscriptionPlan$ | async)?.name == plan.name">Current</button>
     } @else {
     <button>Get Now!</button>
     }

@@ -12,7 +12,7 @@
           <td>TO</td>
         </thead>
         <tbody>
-          @for(history of userService.history; track $index) {
+          @for(history of userService.history$ | async; track $index) {
           <tr>
             <td>{{history.date}}</td>
             <td>{{history.amount}}</td>

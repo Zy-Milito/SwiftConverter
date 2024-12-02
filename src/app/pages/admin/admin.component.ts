@@ -26,6 +26,7 @@ export class AdminComponent {
       confirmButtonColor: '#f49d00',
       cancelButtonColor: '#d33',
       background: '#1b2028',
+      color: '#fff',
     }).then(async (result) => {
       if (result.isConfirmed) {
         await this.userService.deleteUser(userId);
@@ -42,6 +43,7 @@ export class AdminComponent {
       confirmButtonColor: '#f49d00',
       cancelButtonColor: '#d33',
       background: '#1b2028',
+      color: '#fff',
     }).then(async (result) => {
       if (result.isConfirmed) {
         await this.currencyService.deleteCurrency(isoCode);
@@ -67,6 +69,8 @@ export class AdminComponent {
       showCancelButton: true,
       confirmButtonColor: '#f49d00',
       cancelButtonColor: '#d33',
+      background: '#1b2028',
+      color: '#fff',
       didOpen: () => {
         const popup = Swal.getPopup()!;
         nameInput = popup.querySelector('#name') as HTMLInputElement;
@@ -109,6 +113,7 @@ export class AdminComponent {
       confirmButtonColor: '#f49d00',
       cancelButtonColor: '#d33',
       background: '#1b2028',
+      color: '#fff',
       preConfirm: () => {
         const rateInput = document.getElementById('rate') as HTMLInputElement;
         if (!rateInput || !rateInput.value) {

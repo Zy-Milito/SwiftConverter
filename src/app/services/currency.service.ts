@@ -3,13 +3,18 @@ import { ICurrency } from '../interfaces/currency';
 import { environment } from '../../environments/environment.development';
 import { IConversion } from '../interfaces/conversion';
 import { UserService } from './user.service';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrencyService {
   userService = inject(UserService);
-  currencies: ICurrency[] = [];
+  private currenciesSubject: BehaviorSubject<ICurrency[]> = new BehaviorSubject<
+    ICurrency[]
+  >([]);
+  public currencies$ = this.currenciesSubject.asObservable();
 
   constructor() {
     this.loadData();
@@ -19,24 +24,35 @@ export class CurrencyService {
     await this.getCurrencies();
   }
 
-  async getCurrencies() {
-    const res = await fetch(environment.API_URL + 'currency/currencies', {
-      headers: {
-        authorization: 'Bearer ' + localStorage.getItem('authToken'),
-      },
-    });
-    if (res.status !== 200) return;
-    const resJson: ICurrency[] = await res.json();
-    this.currencies = resJson;
-    return resJson;
+  async getCurrencies(): Promise<ICurrency[]> {
+    try {
+      const res = await fetch(environment.API_URL + 'currency/currencies', {
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('authToken'),
+        },
+      });
+      if (res.status !== 200) throw new Error('Failed to fetch currencies.');
+
+      const resJson: ICurrency[] = await res.json();
+      this.currenciesSubject.next(resJson);
+      return resJson;
+    } catch (error) {
+      console.error('Error fetching currencies: ', error);
+      return [];
+    }
   }
 
   async convert(conversionData: IConversion) {
     try {
-      var fromRate = this.currencies.find(
+      let currencies = this.currenciesSubject.value;
+      if (currencies.length === 0) {
+        currencies = await this.getCurrencies();
+      }
+
+      var fromRate = currencies.find(
         (c) => c.id == conversionData.fromCurrencyId
       )?.exchangeRate;
-      var toRate = this.currencies.find(
+      var toRate = currencies.find(
         (c) => c.id == conversionData.toCurrencyId
       )?.exchangeRate;
 
@@ -44,7 +60,7 @@ export class CurrencyService {
         throw new Error('Rates not found.');
       }
 
-      const usd = this.currencies.find((c) => c.isoCode == 'USD')?.exchangeRate;
+      const usd = currencies.find((c) => c.isoCode == 'USD')?.exchangeRate;
       if (!usd) {
         throw new Error('Base currency not valid.');
       }
@@ -56,7 +72,13 @@ export class CurrencyService {
 
       return result;
     } catch (error) {
-      console.error('Error during conversion: ', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Error during conversion.',
+        background: '#1b2028',
+        color: '#fff',
+      });
       throw error;
     }
   }
@@ -74,9 +96,14 @@ export class CurrencyService {
       }
     );
     if (res.status !== 200) {
-      console.error('Rate could not be updated.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Rate could not be updated.',
+        background: '#1b2028',
+        color: '#fff',
+      });
     } else {
-      console.log('Currency rate updated.');
       this.loadData();
     }
   }
@@ -91,10 +118,15 @@ export class CurrencyService {
       body: JSON.stringify(newCurrency),
     });
 
-    if (res.status !== 200) {
-      console.error('Failed to create new currency.');
+    if (res.status !== 201) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Failed to create new currency.',
+        background: '#1b2028',
+        color: '#fff',
+      });
     } else {
-      console.log('Creation successful.');
       this.loadData();
     }
   }
@@ -108,9 +140,14 @@ export class CurrencyService {
       },
     });
     if (res.status !== 200) {
-      console.error('Currency could not be removed.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Currency could not be removed.',
+        background: '#1b2028',
+        color: '#fff',
+      });
     } else {
-      console.log('Currency removed.');
       this.loadData();
     }
   }

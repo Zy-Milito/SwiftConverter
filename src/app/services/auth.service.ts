@@ -5,11 +5,18 @@ import { environment } from '../../environments/environment.development';
 import { IRegister } from '../interfaces/register';
 import { IClaims } from '../interfaces/claims';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<IUser | null> =
+    new BehaviorSubject<IUser | null>(null);
+  public user$ = this.userSubject.asObservable();
+  user: IUser | undefined;
+  claims: IClaims | null = null;
+
   constructor() {
     var token = localStorage.getItem('authToken');
     if (token) {
@@ -17,9 +24,6 @@ export class AuthService {
       this.fetchUserDetails(token);
     }
   }
-
-  user: IUser | undefined;
-  claims: IClaims | null = null;
 
   async login(loginData: ILogin) {
     const res = await fetch(environment.API_URL + 'authentication/login', {
@@ -59,6 +63,8 @@ export class AuthService {
 
     this.user = userDetailsResJson;
     this.claims = this.decodeToken(token);
+    this.userSubject.next(userDetailsResJson);
+
     return userDetailsResJson;
   }
 
@@ -83,6 +89,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     this.user = undefined;
     this.claims = null;
+    this.userSubject.next(null);
   }
 
   decodeToken(token: string): IClaims {

@@ -4,24 +4,43 @@ import { IUser } from '../interfaces/user';
 import { ICurrency } from '../interfaces/currency';
 import { AuthService } from './auth.service';
 import { IHistory } from '../interfaces/history';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   authService = inject(AuthService);
-  users: IUser[] = [];
-  favoriteCurrencies: ICurrency[] = [];
-  history: IHistory[] = [];
+
+  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>(
+    []
+  );
+  public users$ = this.usersSubject.asObservable();
+
+  private favoriteCurrenciesSubject: BehaviorSubject<ICurrency[]> =
+    new BehaviorSubject<ICurrency[]>([]);
+  public favoriteCurrencies$ = this.favoriteCurrenciesSubject.asObservable();
+
+  private historySubject: BehaviorSubject<IHistory[]> = new BehaviorSubject<
+    IHistory[]
+  >([]);
+  public history$ = this.historySubject.asObservable();
 
   constructor() {
-    this.loadData();
+    this.authService.user$.subscribe((user) => {
+      if (user) {
+        this.loadData(user.id);
+      }
+    });
   }
 
-  async loadData() {
-    this.getUsers();
-    this.getFavorites();
-    this.getUserHistory();
+  async loadData(userId: number) {
+    await Promise.all([
+      this.getUsers(),
+      this.getFavorites(userId),
+      this.getUserHistory(userId),
+    ]);
   }
 
   async getUsers() {
@@ -32,7 +51,7 @@ export class UserService {
     });
     if (res.status !== 200) return;
     const resJson: IUser[] = await res.json();
-    this.users = resJson;
+    this.usersSubject.next(resJson);
     return resJson;
   }
 
@@ -45,15 +64,24 @@ export class UserService {
       },
     });
     if (res.status !== 200) {
-      console.error('User could not be removed.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'User could not be removed.',
+        background: '#1b2028',
+        color: '#fff',
+      });
     } else {
-      console.log('User removed.');
-      this.loadData();
+      await this.getUsers();
     }
   }
 
   async newConversion(conversion: object) {
     var userId = this.authService.user?.id;
+    if (!userId) {
+      throw new Error('User not authenticated.');
+    }
+
     const res = await fetch(
       environment.API_URL + `user/${userId}/new-conversion`,
       {
@@ -68,12 +96,11 @@ export class UserService {
     if (res.status !== 201) {
       console.error('Failed to save conversion.');
     } else {
-      console.log('Conversion saved successfully.');
+      await this.getUserHistory(userId);
     }
   }
 
-  async getFavorites() {
-    var userId = this.authService.user?.id;
+  async getFavorites(userId: number) {
     const res = await fetch(environment.API_URL + `user/${userId}/favorites`, {
       method: 'GET',
       headers: {
@@ -82,12 +109,16 @@ export class UserService {
     });
     if (res.status !== 200) return;
     const resJson: ICurrency[] = await res.json();
-    this.favoriteCurrencies = resJson;
+    this.favoriteCurrenciesSubject.next(resJson);
     return resJson;
   }
 
   async toggleFavorite(isoCode: string) {
     var userId = this.authService.user?.id;
+    if (!userId) {
+      throw new Error('User not authenticated.');
+    }
+
     const res = await fetch(
       environment.API_URL + `user/${userId}/favorites/${isoCode}`,
       {
@@ -101,13 +132,11 @@ export class UserService {
     if (res.status !== 200) {
       console.error('Failed to add to favorites.');
     } else {
-      console.log('Currency added to favorites.');
-      this.loadData();
+      await this.getFavorites(userId);
     }
   }
 
-  async getUserHistory() {
-    var userId = this.authService.user?.id;
+  async getUserHistory(userId: number) {
     const res = await fetch(environment.API_URL + `user/${userId}/history`, {
       method: 'GET',
       headers: {
@@ -116,7 +145,7 @@ export class UserService {
     });
     if (res.status !== 200) return;
     const resJson: IHistory[] = await res.json();
-    this.history = resJson;
+    this.historySubject.next(resJson);
     return resJson;
   }
 }

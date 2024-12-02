@@ -3,7 +3,7 @@
 </header>
 <div>
   <section class="user-dashboard">
-    <h2>Registered Users: {{userService.users.length}}</h2>
+    <h2>Registered Users: {{(userService.users$ | async)?.length}}</h2>
     <div>
       <table>
         <thead>
@@ -13,7 +13,7 @@
           <td>Status</td>
         </thead>
         <tbody>
-          @for (user of userService.users; track $index) {
+          @for (user of userService.users$ | async; track $index) {
           <tr>
             <td>{{user.id}}</td>
             <td>{{user.username}}</td>
@@ -30,7 +30,7 @@
     </div>
   </section>
   <section class="currency-dashboard">
-    <h2>Identified Currencies: {{currencyService.currencies.length}}</h2>
+    <h2>Identified Currencies: {{(currencyService.currencies$ | async)?.length}}</h2>
     <div>
       <table>
         <thead>
@@ -40,7 +40,7 @@
           <td>EXR</td>
         </thead>
         <tbody>
-          @for (currency of currencyService.currencies; track $index) {
+          @for (currency of currencyService.currencies$ | async; track $index) {
           <tr>
             <td>{{currency.id}}</td>
             <td><button (click)="removeCurrency(currency.isoCode, currency.name)">{{currency.name}}</button></td>
