@@ -15,11 +15,6 @@ Both the frontend and the backend are being developed simultaneously, with the f
 
 - Lists the conversion history of the logged user.
 
-### Admin tab (Admin only)
-
-- Admins can add, edit, modify, or delete currencies,
-- App metrics.
-
 ### Subscription tab
 
 - User should be able to switch plans.
@@ -42,3 +37,5 @@ Both the frontend and the backend are being developed simultaneously, with the f
 ### User authentication/Token management
 
 ### Currencies tab
+
+### Admin Tab

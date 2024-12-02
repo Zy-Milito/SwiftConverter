@@ -1,1 +1,55 @@
-<p>admin works!</p>
+<header class="admin-header">
+  <h1>Moderation</h1>
+</header>
+<div>
+  <section class="user-dashboard">
+    <h2>Registered Users: {{userService.users.length}}</h2>
+    <div>
+      <table>
+        <thead>
+          <td>ID</td>
+          <td>Username</td>
+          <td>Subscription</td>
+          <td>Status</td>
+        </thead>
+        <tbody>
+          @for (user of userService.users; track $index) {
+          <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.subscriptionPlanId}}</td>
+            <td>
+              <button (click)="removeUser(user.id)"
+                [ngClass]="{'active': user.accountStatus == true, 'deleted': user.accountStatus == false}"
+                [disabled]="user.id == authService.user?.id || user.accountStatus == false">{{user.accountStatus}}</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="currency-dashboard">
+    <h2>Identified Currencies: {{currencyService.currencies.length}}</h2>
+    <div>
+      <table>
+        <thead>
+          <td>ID</td>
+          <td><button (click)="addCurrency()">Name</button></td>
+          <td>ISO 4217</td>
+          <td>EXR</td>
+        </thead>
+        <tbody>
+          @for (currency of currencyService.currencies; track $index) {
+          <tr>
+            <td>{{currency.id}}</td>
+            <td><button (click)="removeCurrency(currency.isoCode, currency.name)">{{currency.name}}</button></td>
+            <td>{{currency.isoCode}}</td>
+            <td><button (click)="updateRate(currency.isoCode, currency.name)">{{currency.exchangeRate}}</button></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

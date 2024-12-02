@@ -46,7 +46,10 @@ export class CurrencyService {
         throw new Error('Rates not found.');
       }
 
-      const usd = 1;
+      const usd = this.currencies.find((c) => c.isoCode == 'USD')?.exchangeRate;
+      if (!usd) {
+        throw new Error('Base currency not valid.');
+      }
       var toUSD = (conversionData.amount * fromRate) / usd;
       var result = (toUSD / toRate) * usd;
       result = Math.round((result + Number.EPSILON) * 100) / 100;
@@ -55,6 +58,60 @@ export class CurrencyService {
     } catch (error) {
       console.error('Error during conversion: ', error);
       throw error;
+    }
+  }
+
+  async updateRate(isoCode: string, newRate: number) {
+    const res = await fetch(
+      environment.API_URL + 'currency/' + isoCode + '/update',
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: 'Bearer ' + localStorage.getItem('authToken'),
+        },
+        body: JSON.stringify(newRate),
+      }
+    );
+    if (res.status !== 200) {
+      console.error('Rate could not be updated.');
+    } else {
+      console.log('Currency rate updated.');
+      this.loadData();
+    }
+  }
+
+  async newCurrency(newCurrency: object) {
+    const res = await fetch(environment.API_URL + 'currency', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken'),
+      },
+      body: JSON.stringify(newCurrency),
+    });
+
+    if (res.status !== 200) {
+      console.error('Failed to create new currency.');
+    } else {
+      console.log('Creation successful.');
+      this.loadData();
+    }
+  }
+
+  async deleteCurrency(isoCode: string) {
+    const res = await fetch(environment.API_URL + `currency/${isoCode}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken'),
+      },
+    });
+    if (res.status !== 200) {
+      console.error('Currency could not be removed.');
+    } else {
+      console.log('Currency removed.');
+      this.loadData();
     }
   }
 }
