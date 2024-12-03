@@ -17,7 +17,9 @@
           <tr>
             <td>{{user.id}}</td>
             <td>{{user.username}}</td>
-            <td>{{user.subscriptionPlanId}}</td>
+            <td><button (click)="changePlan(user.id)"
+                [ngClass]="{'free': getPlanName(user.subscriptionPlanId) == 'Free', 'basic': getPlanName(user.subscriptionPlanId) == 'Basic', 'pro': getPlanName(user.subscriptionPlanId) == 'Pro'}">{{getPlanName(user.subscriptionPlanId)}}</button>
+            </td>
             <td>
               <button (click)="removeUser(user.id)"
                 [ngClass]="{'active': user.accountStatus == true, 'deleted': user.accountStatus == false}"

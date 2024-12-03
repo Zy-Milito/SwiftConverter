@@ -4,6 +4,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +17,43 @@ export class AdminComponent {
   authService = inject(AuthService);
   userService = inject(UserService);
   currencyService = inject(CurrencyService);
+  subscriptionService = inject(SubscriptionService);
+
+  getPlanName(planId: number) {
+    const subscriptionPlans =
+      this.subscriptionService.subscriptionPlansSubject.value;
+    const planName = subscriptionPlans.find((sp) => sp.id == planId)?.name;
+    return planName;
+  }
+
+  changePlan(userId: number) {
+    const subscriptionPlans =
+      this.subscriptionService.subscriptionPlansSubject.value;
+    const inputOptions = subscriptionPlans.reduce((options, plan) => {
+      options[plan.name] = plan.name;
+      return options;
+    }, {} as { [key: string]: string });
+
+    Swal.fire({
+      title: 'Modify User Subscription',
+      input: 'radio',
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to select a plan!';
+        }
+        return;
+      },
+      showCancelButton: true,
+      confirmButtonColor: '#f49d00',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const selectedPlanName = result.value;
+        this.subscriptionService.upgradePlanAdmin(userId, selectedPlanName);
+      }
+    });
+  }
 
   removeUser(userId: number) {
     Swal.fire({

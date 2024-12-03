@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { ISubscriptionPlan } from '../interfaces/subscriptionPlan';
 import { AuthService } from './auth.service';
@@ -10,7 +10,7 @@ import { IUpgradeData } from '../interfaces/upgradeData';
   providedIn: 'root',
 })
 export class SubscriptionService {
-  private subscriptionPlansSubject: BehaviorSubject<ISubscriptionPlan[]> =
+  public subscriptionPlansSubject: BehaviorSubject<ISubscriptionPlan[]> =
     new BehaviorSubject<ISubscriptionPlan[]>([]);
   public subscriptionPlans$ = this.subscriptionPlansSubject.asObservable();
 
@@ -95,6 +95,31 @@ export class SubscriptionService {
         icon: 'error',
         title: 'Fatal Error',
         text: 'Error! Unable to upgrade your subscription.',
+        background: '#1b2028',
+        color: '#fff',
+      });
+    }
+  }
+
+  async upgradePlanAdmin(userId: number, newPlanName: string) {
+    const res = await fetch(
+      environment.API_URL + `user/${userId}/upgrade-plan`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: 'Bearer ' + localStorage.getItem('authToken'),
+        },
+        body: JSON.stringify(newPlanName),
+      }
+    );
+    if (res.status === 200) {
+      await this.getCurrentPlan(userId);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fatal Error',
+        text: 'Error! Unable to upgrade the subscription.',
         background: '#1b2028',
         color: '#fff',
       });
