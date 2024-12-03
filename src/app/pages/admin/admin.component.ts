@@ -52,11 +52,11 @@ export class AdminComponent {
   }
 
   addCurrency() {
+    let newCurrency = {};
     let nameInput: HTMLInputElement;
     let symbolInput: HTMLInputElement;
     let codeInput: HTMLInputElement;
     let exrInput: HTMLInputElement;
-    let newCurrency = {};
 
     Swal.fire({
       title: 'New Currency',

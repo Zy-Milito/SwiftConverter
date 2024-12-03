@@ -4,6 +4,7 @@ import { ISubscriptionPlan } from '../interfaces/subscriptionPlan';
 import { AuthService } from './auth.service';
 import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
+import { IUpgradeData } from '../interfaces/upgradeData';
 
 @Injectable({
   providedIn: 'root',
@@ -58,15 +59,35 @@ export class SubscriptionService {
     return resJson;
   }
 
-  async upgradePlan(userId: number, newPlanId: number) {
-    const res = await fetch(environment.API_URL + `${userId}/upgrade-plan`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + localStorage.getItem('authToken'),
-      },
-      body: JSON.stringify(newPlanId),
-    });
+  async upgradePlan(upgradeData: IUpgradeData) {
+    var userId = this.authService.user?.id;
+    var username = this.authService.user?.username;
+    if (!userId) {
+      throw new Error('User not authenticated.');
+    }
+
+    if (username != upgradeData.holder) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Incorrect Username',
+        text: 'Error! Unable to upgrade your subscription.',
+        background: '#1b2028',
+        color: '#fff',
+      });
+      return;
+    }
+
+    const res = await fetch(
+      environment.API_URL + `user/${userId}/upgrade-plan`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: 'Bearer ' + localStorage.getItem('authToken'),
+        },
+        body: JSON.stringify(upgradeData.newPlanName),
+      }
+    );
     if (res.status === 200) {
       await this.getCurrentPlan(userId);
     } else {

@@ -14,7 +14,7 @@
     @if ((subscriptionService.currentSubscriptionPlan$ | async)?.name == plan.name){
     <button [disabled]="(subscriptionService.currentSubscriptionPlan$ | async)?.name == plan.name">Current</button>
     } @else {
-    <button>Get Now!</button>
+    <button (click)="upgradeSubscription(plan.name)">Get Now!</button>
     }
     <p class="price">${{plan.price}} / month</p>
   </div>
