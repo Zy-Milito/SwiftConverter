@@ -3,16 +3,20 @@
     <img src="/assets/images/swift_imagotype.png" alt="Swift logo.">
     <form #regForm="ngForm" (ngSubmit)="register(regForm)">
       <fieldset>
-        <input type="text" name="username" placeholder="Username" class="input" required ngModel>
-        <input type="email" name="email" placeholder="Email Address" class="input" required ngModel>
-        <input type="password" name="password" placeholder="Password" class="input" required ngModel>
-        <input type="password" name="password-check" placeholder="Repeat Password" class="input" required ngModel>
+        <input type="text" name="username" placeholder="Username" class="input" maxlength="50" required ngModel>
+        <input type="email" name="email" placeholder="Email Address" class="input" maxlength="320" required ngModel>
+        <input type="password" name="password" placeholder="Password" class="input" maxlength="30" required ngModel>
+        <input type="password" name="confirmPassword" placeholder="Repeat Password" class="input" maxlength="30"
+          required ngModel>
       </fieldset>
       <button type="submit" (keyup.enter)="register(regForm)" [disabled]="regForm.invalid"
         [ngClass]="{'register-btn-disabled': regForm.invalid, 'register-btn-enabled': regForm.valid}">Create
         Account</button>
       @if (errorReg) {
       <p>some error</p>
+      }
+      @if (passwordMismatch) {
+      <p>Passwords don't match!</p>
       }
     </form>
   </section>
