@@ -5,12 +5,14 @@ import { IConversion } from '../interfaces/conversion';
 import { UserService } from './user.service';
 import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrencyService {
   userService = inject(UserService);
+  authService = inject(AuthService);
   private currenciesSubject: BehaviorSubject<ICurrency[]> = new BehaviorSubject<
     ICurrency[]
   >([]);
@@ -69,6 +71,9 @@ export class CurrencyService {
       result = Math.round((result + Number.EPSILON) * 100) / 100;
 
       await this.userService.newConversion(conversionData);
+      this.authService.user!.conversionsLeft = (
+        parseInt(this.authService.user!.conversionsLeft) - 1
+      ).toString();
 
       return result;
     } catch (error) {
