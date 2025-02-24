@@ -135,3 +135,36 @@
     }
   }
 }
+
+@media (width <= 1024px) {
+  .login-component {
+    .sign-in {
+      form {
+        .login-btn-enabled:hover {
+          color: initial;
+          background-color: initial;
+        }
+      }
+
+      .login-btn-enabled:active {
+        color: #ffffff;
+        background-color: #f0be63;
+      }
+    }
+
+    .sign-up {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      a:hover {
+        color: initial;
+        background-color: initial;
+      }
+
+      a:active {
+        color: #ffffff;
+        background-color: #132342;
+      }
+    }
+  }
+}
